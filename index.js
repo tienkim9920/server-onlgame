@@ -1,10 +1,61 @@
 
 let caseCaro = []
 
-matrixTop(10, caseCaro)
+matrixYX(10, caseCaro)
+matrixCross(10, caseCaro)
 console.log(caseCaro)
 
-// Hàm này dùng để xử lý
+// Hàm này dùng để khởi tạo tất cả các dòng có thể xảy ra trong mảng
+function matrixYX(colum, arrMap){
+
+    for (let i = 0; i < colum; i++){
+        Horizontal(i, colum, arrMap)
+        vertical(i, colum, arrMap)
+    }
+
+}
+
+// Hàm này dùng để xử lý mạng theo chiều ngang
+function Horizontal(row, colum, arrMap) {
+    
+    const getColum = setColum(colum)
+
+    let arr = createArray(getColum)
+
+    for (let j = 0; j < 5; j++){
+        for (let i = 0; i < getColum; i++){
+
+            arr[i][j] = i + (row * 10) + j
+                
+        }
+    }
+
+    pushArray(arr, arrMap)
+
+}
+
+// Hàm này dùng để xử lý mảng theo chiều dọc
+function vertical(row, colum, arrMap) {
+
+    const getColum = setColum(colum)
+
+    let arr = createArray(getColum)
+
+    for (let i = 0; i < getColum; i++){
+        for (let j = 0; j < 5; j++){
+
+            const value = (j * 10) + (i * 10) + row
+
+            arr[i][j] = value
+
+        }
+    }
+
+    pushArray(arr, arrMap)
+    
+}
+
+// Hàm này dùng để xử lý mảng chéo
 function caseRow(row, colum, arrMap){
 
     const getColum = setColum(colum)
@@ -18,8 +69,10 @@ function caseRow(row, colum, arrMap){
 
             // const value = j < 1 ? (j * 10) + i + (row * 10) : (j * 10) + j + i  + (row * 10)
 
+            // Từ trái qua phải
             const valueLeft = j < 1 ? (j * 10) + i + (row * 10) : arrLeft[i][j - 1] + 11
 
+            // Từ phải qua trái
             const valueRight = j < 1 ? 4 + i + (row * 10) : arrRight[i][j - 1] + 9
 
             arrLeft[i][j] = valueLeft
@@ -34,7 +87,7 @@ function caseRow(row, colum, arrMap){
 
 }
 
-// Hàm này dùng để push mảng con vào mảng cha
+// // Hàm này dùng để push mảng con vào mảng cha
 function pushArray(arrayChild, arrayParent) {
     for (let i = 0; i < arrayChild.length; i++){
         arrayParent.push(arrayChild[i])
@@ -42,7 +95,7 @@ function pushArray(arrayChild, arrayParent) {
 }
 
 // Hàm này dùng để map cái những array vào mảng parent
-function matrixTop(colum, arrMap){
+function matrixCross(colum, arrMap){
 
     const getColum = setColum(colum)
 
