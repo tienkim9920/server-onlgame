@@ -1,37 +1,71 @@
 
 let caseCaro = []
 
-matrixTop(11)
+matrixTop(10, caseCaro)
+console.log(caseCaro)
 
-function caseRow(row, colum){
+// Hàm này dùng để xử lý
+function caseRow(row, colum, arrMap){
 
-    let array = createArray(colum)
+    const getColum = setColum(colum)
+
+    let arrLeft = createArray(getColum)
+
+    let arrRight = createArray(getColum)
 
     for (let j = 0; j < 5; j++){
-        for (let i = 0; i < Math.ceil(colum / 2) + 1; i++){
+        for (let i = 0; i < getColum; i++){
 
-            const value = j < 1 ? (j * 10) + i + (row * 10) : (j * 10) + j + i  + (row * 10)
+            // const value = j < 1 ? (j * 10) + i + (row * 10) : (j * 10) + j + i  + (row * 10)
 
-            array[i][j] = value
+            const valueLeft = j < 1 ? (j * 10) + i + (row * 10) : arrLeft[i][j - 1] + 11
+
+            const valueRight = j < 1 ? 4 + i + (row * 10) : arrRight[i][j - 1] + 9
+
+            arrLeft[i][j] = valueLeft
+
+            arrRight[i][j] = valueRight
 
         }
     }
 
-    console.log(array)
+    pushArray(arrLeft, arrMap)
+    pushArray(arrRight, arrMap)
 
 }
 
-function matrixTop(row){
-    for (let i = 0; i < Math.ceil(row / 2) + 1; i++){
-        caseRow(i, row)
+// Hàm này dùng để push mảng con vào mảng cha
+function pushArray(arrayChild, arrayParent) {
+    for (let i = 0; i < arrayChild.length; i++){
+        arrayParent.push(arrayChild[i])
     }
 }
 
+// Hàm này dùng để map cái những array vào mảng parent
+function matrixTop(colum, arrMap){
+
+    const getColum = setColum(colum)
+
+    for (let i = 0; i < getColum; i++){
+        caseRow(i, colum, arrMap)
+    }
+}
+
+// Hàm này dùng để set colum nếu colum là số chẵn thì cộng 2 lẻ thì cộng 1
+function setColum(colum) {
+    if (colum > 10 && colum % 2 === 0){
+        return Math.ceil(colum/2) + 2
+    }else{
+        return Math.ceil(colum/2) + 1
+    }
+}
+
+// Hàm này dùng để tạo mảng rỗng 2 chiều
 function createArray(colum){
 
     let array = []
 
-    for(var i = 0; i < Math.ceil(colum / 2) + 1; i++){
+    for(var i = 0; i < colum; i++){
 
         array.push([]);
 
