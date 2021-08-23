@@ -62,6 +62,22 @@ io.on('connection', async (socket) => {
         socket.in(data.room).emit('returnRoom', user)
 
     })
+
+    socket.on('replay', (room) => {
+        socket.in(room).emit('replay')
+    })
+
+    socket.on('leaveRoom', (room) => {
+        socket.in(room).emit('leaveRoom')
+    })
+
+    socket.on('send', (data) => {
+        socket.in(data.room).emit('receive', data)
+    })
+
+    socket.on('keyboard', (data) => {
+        socket.in(data.room).emit('keyboard', data)
+    })
 })
 
 
