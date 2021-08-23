@@ -78,8 +78,8 @@ router.patch('/image', async (req, res) => {
     // the first must be delete image previous
     const path = user.image
     
-    // const newPath = path.replace('https://server-lover.herokuapp.com/', './public/')
-    const newPath = path.replace('http://localhost:4000/', './public/')
+    const newPath = path.replace('https://server-onlgame.herokuapp.com/', './public/')
+    // const newPath = path.replace('http://localhost:4000/', './public/')
     
     // delete file path
     fs.unlink(newPath, (err) => {
@@ -95,8 +95,8 @@ router.patch('/image', async (req, res) => {
     var fileName = fileImage.name
 
     // create path to client get image
-    // var fileProduct = "https://server-lover.herokuapp.com/" + fileName
-    var fileProduct = "http://localhost:4000/" + fileName
+    var fileProduct = "https://server-onlgame.herokuapp.com/" + fileName
+    // var fileProduct = "http://localhost:4000/" + fileName
 
     user.image = fileProduct
 
