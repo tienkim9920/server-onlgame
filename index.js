@@ -57,7 +57,7 @@ io.on('connection', async (socket) => {
         const cache = {
             id: socket.id,
             room: data,
-            expiredTime: Date.now() + 480000
+            expiredTime: Date.now() + 960000
         }
 
         roomCache.push(cache)
@@ -87,7 +87,7 @@ io.on('connection', async (socket) => {
         const cache = {
             id: socket.id,
             room,
-            expiredTime: Date.now() + 480000
+            expiredTime: Date.now() + 960000
         }
 
         // Kiểm tra xem thử phòng đó có bao nhiêu người chơi
